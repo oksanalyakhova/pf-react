@@ -16,10 +16,6 @@ const StyledMain = styled.main`{
   `}
  
 }`
-// ${breakpoint('md' as any)`
-//   background: black;
-// `}
-// console.log(R(1000))
 
 const StyledSectionHello = styled.section`{
   width: 100vw;
