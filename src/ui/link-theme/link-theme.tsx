@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { Link } from "react-router-dom";
 import classNames from 'classnames';
 import styled from 'styled-components';
 
 interface LinkThemeProps {
     text?: string;
-    href: string
+    href?: string;
 }
 
 const StyledLink = styled(Link)`
@@ -34,20 +34,39 @@ const StyledLink = styled(Link)`
   }
 `
 
-const LinkTheme = ({ text, href }: LinkThemeProps) => {
+const LinkTheme: FunctionComponent<LinkThemeProps> = ({
+    text,
+    href
+}): JSX.Element => {
     const [inHover, setHover] = useState(false);
 
-    const classes = classNames('link link-theme', {
+    const classes = classNames('link link-variables', {
         'is-hovered': inHover,
     })
     return (
         <StyledLink to={{pathname: href}} data-cursor
-              className={classes}
-              onMouseEnter={() => setHover(true)}
-              onMouseLeave={() => setHover(false)}>
+                    className={classes}
+                    onMouseEnter={() => setHover(true)}
+                    onMouseLeave={() => setHover(false)}>
             {text}
         </StyledLink>
     );
 }
+//
+// const LinkTheme = ({ text, href }: LinkThemeProps) => {
+//     const [inHover, setHover] = useState(false);
+//
+//     const classes = classNames('link link-variables', {
+//         'is-hovered': inHover,
+//     })
+//     return (
+//         <StyledLink to={{pathname: href}} data-cursor
+//               className={classes}
+//               onMouseEnter={() => setHover(true)}
+//               onMouseLeave={() => setHover(false)}>
+//             {text}
+//         </StyledLink>
+//     );
+// }
 
 export default LinkTheme;
