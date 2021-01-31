@@ -111,21 +111,6 @@ export const Center = (
     `
 }
 
-export const Font = (
-    alias: string,
-    name: string,
-    weight: any,
-) => {
-    return `
-        @font-face
-            font-family: ${alias};
-            src: url("./assets/fonts/${name}.woff2") format("woff2"), url("./assets/fonts/${name}.woff") format("woff");
-            font-weight: ${weight};
-            font-style: normal;
-            font-display: swap;
-    `
-}
-
 export const FS = (
     sizeValue?: number,
 ) => {
