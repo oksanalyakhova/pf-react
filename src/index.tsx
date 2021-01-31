@@ -4,7 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { createGlobalStyle } from 'styled-components';
-import variables from './helpers/variables';
+import { theme } from './helpers/variables';
 
 import { Normalize } from 'styled-normalize';
 import './index.sass';
@@ -75,10 +75,10 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
         width: 100%;
         height: 100%;
-        font-family: ${variables.ff};
-        font-weight: ${variables.fRegular};
-        color: ${variables.cText};
-        background-color: ${variables.cBg};
+        font-family: ${theme.variables.ff};
+        font-weight: ${theme.variables.fRegular};
+        color: ${theme.variables.cText};
+        background-color: ${theme.variables.cBg};
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
@@ -87,7 +87,7 @@ const GlobalStyle = createGlobalStyle`
 ReactDOM.render(
   <React.StrictMode>
       <Normalize />
-      <GlobalStyle theme={variables} />
+      <GlobalStyle theme={theme} />
       <App />
   </React.StrictMode>,
   document.getElementById('root')
