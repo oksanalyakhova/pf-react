@@ -52,21 +52,5 @@ const LinkTheme: FunctionComponent<LinkThemeProps> = ({
         </StyledLink>
     );
 }
-//
-// const LinkTheme = ({ text, href }: LinkThemeProps) => {
-//     const [inHover, setHover] = useState(false);
-//
-//     const classes = classNames('link link-variables', {
-//         'is-hovered': inHover,
-//     })
-//     return (
-//         <StyledLink to={{pathname: href}} data-cursor
-//               className={classes}
-//               onMouseEnter={() => setHover(true)}
-//               onMouseLeave={() => setHover(false)}>
-//             {text}
-//         </StyledLink>
-//     );
-// }
 
 export default LinkTheme;

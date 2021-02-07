@@ -1,8 +1,12 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { theme } from '../../../helpers/variables';
 import { FlexUnit } from '../../../helpers/mixins';
 // import breakpoint from 'styled-components-breakpoint';
+import { gsap } from "gsap";
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+// gsap.registerPlugin(ScrollTrigger);
 
 interface PageIndexProps {
     text?: string;
@@ -10,8 +14,7 @@ interface PageIndexProps {
 
 const StyledMain = styled.main`{
   width: 100%;
-  height: 100%;
-  ${FlexUnit(5, 32, 60, 'vw', 'font-size')};
+  height: 100%;;
   
   
 }`
@@ -20,20 +23,15 @@ const StyledMain = styled.main`{
 //   `}
 
 
-const StyledSectionHello = styled.section`{
+const StyledSection = styled.section`{
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  overflow: hidden;
   ${FlexUnit(30, 80, 300, 'vw', 'font-size')};
   text-transform: uppercase;
 }`
 
 const StyledO = styled.div`{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -44,10 +42,18 @@ const StyledO = styled.div`{
 
 const StyledHello = styled.div`{
   position: absolute;
-  top: 0;
-  left: 100%;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${theme.variables.cText};
+  background-color: ${theme.variables.cBg};
+}`
+
+const StyledEnd = styled.div`{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,17 +64,53 @@ const StyledHello = styled.div`{
 const PageIndex: FunctionComponent<PageIndexProps> = ({
     text
 }): JSX.Element => {
+    const refSection = useRef<HTMLElement>(null);
+    const refHello = useRef<HTMLDivElement>(null);
+    // const [offWidth, setOffWidth] = useState(0);
 
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+        }
 
+        if (refSection.current && refHello.current) {
+            // setOffWidth(refSection.current.offsetWidth);
+
+            const action = gsap.timeline({
+                scrollTrigger: {
+                    trigger: refSection.current,
+                    pin: true,
+                    scrub: 0.3,
+                    start: "top top",
+                    end: "+=3000"
+                }
+            })
+                .to(refHello.current, {xPercent: -100, duration:2, ease: "none"})
+                .to({},{duration: 0.5})
+        }
+
+    })
 
     return (
         <StyledMain className="main">
-            <StyledSectionHello className="hello">
-                <StyledO className="hello__preview">O</StyledO>
-                <StyledHello className="hello__content">
-                    Hello
+            {/*<StyledSection>*/}
+            {/*    <StyledO className="hello__preview">*/}
+            {/*        <div>O</div>*/}
+            {/*    </StyledO>*/}
+            {/*</StyledSection>*/}
+            <StyledSection ref={refSection} className="hello">
+                <StyledO className="hello__preview">
+                    <div>O</div>
+                </StyledO>
+                <StyledHello ref={refHello} className="hello__content">
+                    <div>Hello</div>
                 </StyledHello>
-            </StyledSectionHello>
+            </StyledSection>
+            {/*<StyledSection>*/}
+            {/*    <StyledEnd className="hello__content">*/}
+            {/*        <div>Hello</div>*/}
+            {/*    </StyledEnd>*/}
+            {/*</StyledSection>*/}
         </StyledMain>
     )
 }
