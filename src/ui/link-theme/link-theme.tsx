@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useState } from 'react';
-import { Link } from "react-router-dom";
+import React, {FunctionComponent, useState} from 'react';
+import {Link} from "react-router-dom";
 import classNames from 'classnames';
 import styled from 'styled-components';
 
@@ -35,9 +35,9 @@ const StyledLink = styled(Link)`
 `
 
 const LinkTheme: FunctionComponent<LinkThemeProps> = ({
-    text,
-    href
-}): JSX.Element => {
+                                                          text,
+                                                          href
+                                                      }): JSX.Element => {
     const [inHover, setHover] = useState(false);
 
     const classes = classNames('link link-variables', {

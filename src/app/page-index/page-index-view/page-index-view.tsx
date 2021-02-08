@@ -1,9 +1,9 @@
-import React, { FunctionComponent, useRef, useEffect, useState } from 'react';
+import React, {FunctionComponent, useRef, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { theme } from '../../../helpers/variables';
-import { FlexUnit } from '../../../helpers/mixins';
+import {theme} from '../../../helpers/variables';
+import {FlexUnit} from '../../../helpers/mixins';
 // import breakpoint from 'styled-components-breakpoint';
-import { gsap } from "gsap";
+import {gsap} from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
 // gsap.registerPlugin(ScrollTrigger);
@@ -15,8 +15,6 @@ interface PageIndexProps {
 const StyledMain = styled.main`{
   width: 100%;
   height: 100%;;
-  
-  
 }`
 // ${breakpoint('desktop')`
 //     font-size: 16px;
@@ -62,8 +60,8 @@ const StyledEnd = styled.div`{
 }`
 
 const PageIndex: FunctionComponent<PageIndexProps> = ({
-    text
-}): JSX.Element => {
+                                                          text
+                                                      }): JSX.Element => {
     const refSection = useRef<HTMLElement>(null);
     const refHello = useRef<HTMLDivElement>(null);
     // const [offWidth, setOffWidth] = useState(0);
@@ -85,8 +83,8 @@ const PageIndex: FunctionComponent<PageIndexProps> = ({
                     end: "+=3000"
                 }
             })
-                .to(refHello.current, {xPercent: -100, duration:2, ease: "none"})
-                .to({},{duration: 0.5})
+                .to(refHello.current, {xPercent: -100, duration: 2, ease: "none"})
+                .to({}, {duration: 0.5})
         }
 
     })

@@ -107,7 +107,7 @@ export const Center = (
                 transform: translate(-50%, -50%);
                 
             `
-        }
+    }
     `
 }
 
@@ -118,11 +118,11 @@ export const FS = (
     ${
         sizeValue
             ?
-                `font-size: ${sizeValue}px;
+            `font-size: ${sizeValue}px;
                 font-size: ${sizeValue} / 10 + rem;`
-            :   `font-size: 16px;
+            : `font-size: 16px;
                 font-size: 16 / 10 + rem;`
-        }   
+    }   
     `
 }
 
@@ -148,10 +148,10 @@ export const Trans = (
     return `
     ${
         what
-            ? 
-                `transition: ${what} ${dur} ${easing};`
-            :   `transition: all .35s ease;`
-        }
+            ?
+            `transition: ${what} ${dur} ${easing};`
+            : `transition: all .35s ease;`
+    }
         
     `
 }

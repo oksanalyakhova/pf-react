@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { createGlobalStyle } from 'styled-components';
-import { theme } from './helpers/variables';
+import {createGlobalStyle} from 'styled-components';
+import {theme} from './helpers/variables';
 
-import { Normalize } from 'styled-normalize';
+import {Normalize} from 'styled-normalize';
 import './index.sass';
 
 const GlobalStyle = createGlobalStyle`
@@ -85,12 +85,12 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 ReactDOM.render(
-  <React.StrictMode>
-      <Normalize />
-      <GlobalStyle theme={theme} />
-      <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Normalize/>
+        <GlobalStyle theme={theme}/>
+        <App/>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
