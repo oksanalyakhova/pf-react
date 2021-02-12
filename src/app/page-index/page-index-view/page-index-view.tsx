@@ -1,12 +1,11 @@
-import React, {FunctionComponent, useRef, useEffect, useState} from 'react';
+import React, {FunctionComponent, useRef, useEffect} from 'react';
 import styled from 'styled-components';
 import {theme} from '../../../helpers/variables';
 import {FlexUnit} from '../../../helpers/mixins';
 // import breakpoint from 'styled-components-breakpoint';
+import BlockPreview from '../components/block-preview/block-preview';
 import {gsap} from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-
-// gsap.registerPlugin(ScrollTrigger);
 
 interface PageIndexProps {
     text?: string;
@@ -20,22 +19,12 @@ const StyledMain = styled.main`{
 //     font-size: 16px;
 //   `}
 
-
 const StyledSection = styled.section`{
   position: relative;
   width: 100%;
   height: 100vh;
   ${FlexUnit(30, 80, 300, 'vw', 'font-size')};
   text-transform: uppercase;
-}`
-
-const StyledO = styled.div`{
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${theme.variables.cBg};
-  background-color: ${theme.variables.cText};
 }`
 
 const StyledHello = styled.div`{
@@ -51,17 +40,17 @@ const StyledHello = styled.div`{
   background-color: ${theme.variables.cBg};
 }`
 
-const StyledEnd = styled.div`{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${theme.variables.cText};
-  background-color: ${theme.variables.cBg};
-}`
+// const StyledEnd = styled.div`{
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   color: ${theme.variables.cText};
+//   background-color: ${theme.variables.cBg};
+// }`
 
 const PageIndex: FunctionComponent<PageIndexProps> = ({
-                                                          text
-                                                      }): JSX.Element => {
+    text
+}): JSX.Element => {
     const refSection = useRef<HTMLElement>(null);
     const refHello = useRef<HTMLDivElement>(null);
     // const [offWidth, setOffWidth] = useState(0);
@@ -74,7 +63,10 @@ const PageIndex: FunctionComponent<PageIndexProps> = ({
         if (refSection.current && refHello.current) {
             // setOffWidth(refSection.current.offsetWidth);
 
-            const action = gsap.timeline({
+            gsap.to(refHello.current, {
+                xPercent: -100,
+                duration: 2,
+                ease: "none",
                 scrollTrigger: {
                     trigger: refSection.current,
                     pin: true,
@@ -83,8 +75,7 @@ const PageIndex: FunctionComponent<PageIndexProps> = ({
                     end: "+=3000"
                 }
             })
-                .to(refHello.current, {xPercent: -100, duration: 2, ease: "none"})
-                .to({}, {duration: 0.5})
+                // gsap.to({}, {duration: 0.5})
         }
 
     })
@@ -97,9 +88,7 @@ const PageIndex: FunctionComponent<PageIndexProps> = ({
             {/*    </StyledO>*/}
             {/*</StyledSection>*/}
             <StyledSection ref={refSection} className="hello">
-                <StyledO className="hello__preview">
-                    <div>O</div>
-                </StyledO>
+                <BlockPreview />
                 <StyledHello ref={refHello} className="hello__content">
                     <div>Hello</div>
                 </StyledHello>
