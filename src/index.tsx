@@ -82,6 +82,10 @@ const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+    
+    canvas {
+      width: 100%;
+    }
 `;
 
 ReactDOM.render(
