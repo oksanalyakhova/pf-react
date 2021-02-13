@@ -35,9 +35,9 @@ const StyledLink = styled(Link)`
 `
 
 const LinkTheme: FunctionComponent<LinkThemeProps> = ({
-                                                          text,
-                                                          href
-                                                      }): JSX.Element => {
+    text,
+    href
+}): JSX.Element => {
     const [inHover, setHover] = useState(false);
 
     const classes = classNames('link link-variables', {

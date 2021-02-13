@@ -1,10 +1,12 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useContext} from 'react';
+import AppContext from '../../../AppContext';
 import styled from 'styled-components';
-import {theme} from '../../../helpers/variables';
 import breakpoint from 'styled-components-breakpoint';
 import {gsap} from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import * as PIXI from 'pixi.js';
+import {theme} from '../../../helpers/variables';
+import SplittingText from '../../../ui/splitting-text/splitting-text';
 
 import hello from '../../../assets/img/hello.png';
 import displacement from '../../../assets/img/displacement.jpg';
@@ -57,7 +59,9 @@ const StyledHello = styled.div`{
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${theme.variables.cBg};
+  color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: ${theme.variables.cBg};
 }`
 
 const StyledEnd = styled.div`{
@@ -68,6 +72,7 @@ const StyledEnd = styled.div`{
 }`
 
 const PageIndex = ():JSX.Element => {
+    const myContext = useContext(AppContext);
     const refMain = useRef<HTMLElement>(null);
     const refSectionFirst = useRef<HTMLDivElement>(null);
     const refSectionSecond = useRef<HTMLDivElement>(null);
@@ -125,11 +130,11 @@ const PageIndex = ():JSX.Element => {
             });
 
             // gsap
-            gsap.set(displacementFilter.scale,{x: 40,y: 10});
+            gsap.set(displacementFilter.scale,{x: 100,y: 200});
 
             gsap.to(displacementFilter.scale,{
-                x: 100,
-                y: 200,
+                x: 40,
+                y: 10,
                 duration: 2,
                 ease: "none",
                 scrollTrigger: {
@@ -154,6 +159,23 @@ const PageIndex = ():JSX.Element => {
                 }
             })
 
+            // anim Hello
+            const letters = [...document.querySelectorAll('.letter')];
+            gsap.to(letters,{
+                rotate: ()=> 360*(Math.random() - 0.5),
+                y: ()=> myContext.windowHeight,
+                duration: 2,
+                delay: 0.5,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: refSectionSecond.current,
+                    pin: true,
+                    scrub: 0.3,
+                    start: "top bottom",
+                    end: "+=" + myContext.windowHeight / 2
+                }
+            });
+
             return () => {
                 application.destroy(true);
             };
@@ -167,7 +189,7 @@ const PageIndex = ():JSX.Element => {
                     <StyledCanvasWrap ref={refCanvas}/>
                 </StyledO>
                 <StyledHello ref={refHello}>
-                    <div>Hello</div>
+                    <SplittingText text={'Hello'} />
                 </StyledHello>
             </StyledSection>
             <StyledSection ref={refSectionSecond}>
